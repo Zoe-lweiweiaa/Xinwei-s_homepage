@@ -566,7 +566,7 @@ Create `package.json`.
   "private": true,
   "scripts": {
     "test": "node tests/static-check.mjs",
-    "serve": "python3 -m http.server 4173"
+    "serve": "python3 -m http.server 51837"
   }
 }
 ```
@@ -646,12 +646,12 @@ npm run serve
 Expected:
 
 ```text
-Serving HTTP on :: port 4173
+Serving HTTP on :: port 51837
 ```
 
 - [ ] **Step 3: Browser verification**
 
-Open `http://localhost:4173` and verify:
+Open `http://localhost:51837` and verify:
 
 - Desktop layout has top nav, left sidebar, right content column.
 - Mobile width stacks sidebar above content and keeps navigation readable.
