@@ -86,6 +86,7 @@ assert(html.includes("Beijing, China"), "Missing CUFE location");
 assert(html.includes("Sep 2021 - Jun 2025"), "Missing CUFE dates");
 assert(html.includes("Honors and Awards"), "Honors section should use the reference title");
 for (const honor of [
+  "2026 | Best Practice Award in R&D Competition",
   "2026 | Top 100 of China Final of L'Oreal Brandstorm 2026",
   "2026 | Outstanding Executive Committee Member of Oxford Chinese Students and Scholars Association",
   "2025 | First-Class Comprehensive Development Scholarship",
@@ -94,6 +95,11 @@ for (const honor of [
 ]) {
   assert(visibleText.includes(honor), `Missing honor entry: ${honor}`);
 }
+assert(
+  visibleText.indexOf("2026 | Best Practice Award in R&D Competition") <
+    visibleText.indexOf("2026 | Top 100 of China Final of L'Oreal Brandstorm 2026"),
+  "Best Practice Award should appear before the L'Oreal Brandstorm honor"
+);
 assert(html.includes("honors-list"), "Honors should use the reference-style list");
 assert(css.includes(".honors-list"), "Missing honors list CSS");
 assert(css.includes(".honor-year"), "Missing bold honor year CSS");
