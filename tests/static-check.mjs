@@ -39,6 +39,8 @@ for (const iconClass of ["profile-icon-location", "profile-icon-school", "profil
 assert(!html.includes("Blog Posts"), "Blog Posts should not appear in MVP");
 assert(html.includes("AppLovin"), "Missing AppLovin portfolio case");
 assert(html.includes("Dingdong Maicai"), "Missing Dingdong Maicai portfolio case");
+assert(html.includes("AI-powered Diffuser Innovation BD"), "Missing AI-powered diffuser portfolio case");
+assert(html.includes("AI Investment Strategy Development"), "Missing AI investment strategy portfolio case");
 assert(html.includes("Macro Data Forecasting"), "Missing macro forecasting portfolio case");
 assert(html.includes("Pinhaofan Strategy Research"), "Missing Pinhaofan portfolio case");
 assert(html.includes("National College Student Mathematical Modeling Competition"), "Missing mathematical modeling content");
@@ -55,11 +57,62 @@ for (const portfolioText of [
   "Issued a Buy rating with a $2.30 target price.",
   "front-end warehouse model",
   "7.5% net margin",
-  "1,900 Orders/Warehouse"
+  "1,900 Orders/Warehouse",
+  "Designed the commercialization strategy for an AI-powered smart fragrance diffuser",
+  "$850 hardware price",
+  "$400 annual consumables repurchase model",
+  "$850 Hardware",
+  "$400 Repurchase",
+  "SOM Sizing",
+  "Develop ETF investment strategies",
+  "macroeconomic data acquisition",
+  "LLM-based ranking",
+  "32 trading days in total",
+  "+ 0.70 to + 3.21 percentage points",
+  "4/4 Positive Excess"
 ]) {
   assert(visibleText.includes(portfolioText), `Missing portfolio summary/tag text: ${portfolioText}`);
 }
+assert(html.includes("assets/diffuser-innovation-bd.png"), "Missing AI-powered diffuser portfolio image reference");
+assert(existsSync("assets/diffuser-innovation-bd.png"), "AI-powered diffuser portfolio image asset is missing");
+for (const asset of [
+  "assets/ai-investment-strategy-1.png",
+  "assets/ai-investment-strategy-2.png",
+  "assets/ai-investment-strategy-3.png",
+  "assets/ai-investment-strategy-4.png"
+]) {
+  assert(html.includes(asset), `Missing AI investment strategy image reference: ${asset}`);
+  assert(existsSync(asset), `AI investment strategy image asset is missing: ${asset}`);
+}
+assert(html.includes("portfolio-media-grid"), "AI investment strategy images should use a 2x2 media grid");
+assert(
+  visibleText.indexOf("AI-powered Diffuser Innovation BD") <
+    visibleText.indexOf("AppLovin (NASDAQ: APP.US)"),
+  "AI-powered diffuser portfolio case should appear before AppLovin"
+);
+assert(
+  visibleText.indexOf("AI-powered Diffuser Innovation BD") <
+    visibleText.indexOf("AI Investment Strategy Development") &&
+    visibleText.indexOf("AI Investment Strategy Development") <
+      visibleText.indexOf("AppLovin (NASDAQ: APP.US)"),
+  "AI investment strategy portfolio case should appear after Diffuser and before AppLovin"
+);
 assert(css.includes("object-fit: contain"), "Portfolio images should display fully without cropping");
+assert(css.includes(".portfolio-media-grid"), "Missing 2x2 portfolio media grid CSS");
+assert(
+  css.includes("width: min(1680px, calc(100% - 96px));"),
+  "Page shell should use a wider desktop layout so all content sections can expand"
+);
+assert(
+  css.includes("grid-template-columns: minmax(210px, 260px) minmax(0, 1fr);"),
+  "Page shell should keep the author column compact and let the content column grow"
+);
+assert(
+  css.includes("grid-template-columns: minmax(360px, 48%) minmax(0, 1fr);"),
+  "Portfolio cards should give the media column more desktop space"
+);
+assert(css.includes("grid-template-rows: repeat(2, minmax(0, 1fr));"), "AI strategy images should use equal-height 2x2 rows");
+assert(css.includes("padding: 10px;"), "Portfolio media should reduce padding so images appear larger");
 assert(css.includes(".portfolio-card:hover"), "Portfolio cards should have Education-style hover interaction");
 assert(css.includes("--accent: #d97352;"), "Accent color should match internship link orange");
 assert(css.includes("--hover-border: rgba(217, 115, 82, 0.42);"), "Hover border should use the shared orange highlight");
