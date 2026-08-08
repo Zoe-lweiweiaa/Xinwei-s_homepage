@@ -39,7 +39,8 @@ for (const iconClass of ["profile-icon-location", "profile-icon-school", "profil
 assert(!html.includes("Blog Posts"), "Blog Posts should not appear in MVP");
 assert(html.includes("AppLovin"), "Missing AppLovin portfolio case");
 assert(html.includes("Dingdong Maicai"), "Missing Dingdong Maicai portfolio case");
-assert(html.includes("AI-powered Diffuser Innovation BD"), "Missing AI-powered diffuser portfolio case");
+assert(html.includes("AI-powered Diffuser Innovation"), "Missing AI-powered diffuser portfolio case");
+assert(!html.includes("AI-powered Diffuser Innovation BD"), "AI-powered diffuser portfolio title should not include BD");
 assert(html.includes("AI Investment Strategy Development"), "Missing AI investment strategy portfolio case");
 assert(html.includes("Macro Data Forecasting"), "Missing macro forecasting portfolio case");
 assert(html.includes("Pinhaofan Strategy Research"), "Missing Pinhaofan portfolio case");
@@ -86,16 +87,25 @@ for (const asset of [
 }
 assert(html.includes("portfolio-media-grid"), "AI investment strategy images should use a 2x2 media grid");
 assert(
-  visibleText.indexOf("AI-powered Diffuser Innovation BD") <
+  visibleText.indexOf("AI Investment Strategy Development") <
+    visibleText.indexOf("AI-powered Diffuser Innovation") &&
+    visibleText.indexOf("AI-powered Diffuser Innovation") <
+      visibleText.indexOf("AppLovin (NASDAQ: APP.US)"),
+  "AI investment strategy should appear first, followed by Diffuser, before AppLovin"
+);
+assert(
+  !visibleText.includes("Selected research cases covering equity research, macro forecasting, strategy research, and quantitative problem solving."),
+  "Portfolio section lead text should be removed"
+);
+assert(
+  visibleText.indexOf("AI-powered Diffuser Innovation") <
     visibleText.indexOf("AppLovin (NASDAQ: APP.US)"),
   "AI-powered diffuser portfolio case should appear before AppLovin"
 );
 assert(
-  visibleText.indexOf("AI-powered Diffuser Innovation BD") <
-    visibleText.indexOf("AI Investment Strategy Development") &&
-    visibleText.indexOf("AI Investment Strategy Development") <
-      visibleText.indexOf("AppLovin (NASDAQ: APP.US)"),
-  "AI investment strategy portfolio case should appear after Diffuser and before AppLovin"
+  visibleText.indexOf("AI Investment Strategy Development") <
+    visibleText.indexOf("AI-powered Diffuser Innovation"),
+  "AI investment strategy portfolio case should appear before Diffuser"
 );
 assert(css.includes("object-fit: contain"), "Portfolio images should display fully without cropping");
 assert(css.includes(".portfolio-media-grid"), "Missing 2x2 portfolio media grid CSS");
